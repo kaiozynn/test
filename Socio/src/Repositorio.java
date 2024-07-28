@@ -7,9 +7,18 @@ public class Repositorio {
     indice = 0;
   }
 
-  public void inserir(Socio s) {
-    BD[indice] = s;
-    indice++;
+  public void inserir(Socio s) throws EISocioCadastrado {
+    try {
+      for (int i = 0; i < indice; i++) {
+        if (BD[i] == s) {
+            throw new EISocioCadastrado("Usuário já cadastrado");
+        }
+      }
+      BD[indice] = s;
+      indice++;
+    } catch (EISocioCadastrado e) {
+      System.out.println(e);
+    }
   }
 
   public void remover(String m) {
